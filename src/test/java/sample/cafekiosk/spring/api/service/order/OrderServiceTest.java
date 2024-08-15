@@ -4,12 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
-import sample.cafekiosk.spring.api.service.order.reponse.OrderResponse;
 import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
+import sample.cafekiosk.spring.api.service.order.reponse.OrderResponse;
 import sample.cafekiosk.spring.domain.order.OrderRepository;
 import sample.cafekiosk.spring.domain.orderproduct.OrderProductRepository;
 import sample.cafekiosk.spring.domain.product.Product;
@@ -22,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.*;
+import static sample.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
 @ActiveProfiles("test")
@@ -45,7 +43,7 @@ class OrderServiceTest {
     @Autowired
     private OrderService orderService;
 
-    //그래서 클렌징 작업을 아래와 같이 해준다 혹은 클래스 단위에 @Transactional 을 달아준다
+    //그래서 클렌징 작업을 아래와 같이 해준다 혹은 클래스 단위에 @Transactional 을 달아준다.
     //Test 에서 Transactional 안달고 진행했는데 에러가 난다면 Service 단에 Transactional 달려있는지 확인
     //이런 부분들을 놓칠 수 있기 때문에 테스트에 Transactional을 달지 않는 편..대체 방법으로 AfterEach 로 클렌징 작업을 함
     //테스트에서 Transactional 사용하다가 Service에 Transactional이 안달린 것을 늦게 알게 되는 상황이 발생할 수 있음 -> 장애
